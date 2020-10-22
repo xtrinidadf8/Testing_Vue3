@@ -1,13 +1,13 @@
 <template>
   <nav :class="`navbar navbar--${theme}`">
-  <div :class="`navbar__naming--${theme}-mode`" class="navbar__naming">
-    {{brandUppercase}} CHALLENGE
-  </div>
-  <div class="navbar__links">
-    <a :class="`navbar__links__link--${theme}-mode`" class="navbar__links__link" v-for="link in links">
-      <span class="navbar__links__link__text"> {{link}} </span>
-    </a>
-  </div>
+    <div :class="`navbar__naming--${theme}-mode`" class="navbar__naming">
+      {{brandUppercase}} CHALLENGE
+    </div>
+    <div class="navbar__links">
+      <a :class="`navbar__links__link--${theme}-mode`" class="navbar__links__link navbar__links__link--lateral-margin" v-for="link in links">
+        <span class="navbar__links__link__text"> {{link}} </span>
+      </a>
+    </div>
   </nav>
 </template>
 
@@ -45,19 +45,18 @@ export default defineComponent({
   min-height: 7rem;
   max-height: 10rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .navbar--dark {
   background-color: #1b0f23;
 }
 
-.navbar--light {
-  background-color: #e9e9e9;
-}
 .navbar__naming {
   @include Rajdhani;
-  font-size: 3rem;
-  line-height: 3rem;
+  margin-left: 1rem;
+  font-size: 5vmin;
+  line-height: 6vmin;
   flex-basis: 5rem;
   flex-grow: 0.75;
   display: flex;
@@ -66,13 +65,15 @@ export default defineComponent({
     color: #bab9bb;
   }
   &--light-mode {
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(0, 0, 0, 0.85);
   }
 }
 
 .navbar__links {
+  margin-top: 2rem;
   flex-grow: 1;
   display: flex;
+  flex-wrap: wrap;
 }
 .navbar__links__link {
   @include Rajdhani;
@@ -81,13 +82,15 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   flex: 1 0;
-  width: 0;
 
   &--dark-mode {
     color: #bab9bb;
   }
   &--light-mode {
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(0, 0, 0, 0.8);
+  }
+  &--lateral-margin {
+    margin: 0 1rem 0 1rem;
   }
 }
 

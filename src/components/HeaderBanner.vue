@@ -1,11 +1,17 @@
 <template>
   <div class="banner">
-    <a class="banner__logo">
-      <img class="banner__logo__image"
-           src="https://www.playoffnations.com/wp-content/uploads/2020/03/1584888171829_POFFN_logo.png"
-           alt="Playoffnations"
-      />
-    </a>
+    <video loop autoplay muted class="banner__video"
+      :class="`banner__video--${theme}-mode`">
+      <source src="../assets/header-video.mp4" type="video/mp4">
+    </video>
+    <div class="banner__logo__wrapper">
+      <a class="banner__logo" target="_blank" rel="noopener noreferrer" href="https://www.playoffnations.com/">
+        <img class="banner__logo__image"
+             src="../assets/playoffnations-logo.png"
+             alt="Playoffnations"
+        />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -19,27 +25,46 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .banner {
-  min-height: 15rem;
-  max-height: 20rem;
-  background-image: url("../assets/header-banner.jpg");
-  background-size: cover;
-  background-position: 0 -0.5rem;
-  background-repeat: no-repeat;
-  margin-bottom: 1rem;
-  margin-right: 3rem;
+  margin-bottom: 2rem;
+  position: relative;
+  height: 40vw;
+  max-height: 25rem;
+  min-height: 10rem;
+}
+
+.banner__logo__wrapper {
+  position: absolute;
+  top: 0;
+  height: 49%;
+  max-height: 70%;
+  min-width: 6rem;
+  min-height: 8rem;
 }
 .banner__logo {
-  display: flex;
-  padding: 0.1rem;
-  align-content: center;
-  min-width: 3rem;
-  max-width: 10rem;
+  cursor: pointer;
+  position: relative;
+  top: 1rem;
+  left: 1rem;
 }
 
 .banner__logo__image {
   flex-grow: 1;
-  height: 50%;
+  display: block;
+  height: 100%;
+}
+
+.banner__video {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  &--darl-mode {
+    background: linear-gradient(0deg, #1c1026 0%, rgba(0, 0, 0, 0.96) 52%)
+  }
+  &--light-mode {
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(0 0 0 / 88%)  75%);
+  }
+
 }
 </style>

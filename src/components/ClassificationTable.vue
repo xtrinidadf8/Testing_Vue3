@@ -9,61 +9,27 @@
         {{ filter }}
       </div>
     </div>
-    <div
-        :class="`table__data--${theme}-mode`"
-        class="table__data"
-        v-for="(streamer, index) in tournamentData"
-        v-bind:key="index"
-    >
-      <div class="table__data__info table__data__info--center">
-        {{ index + 1 }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.name }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        <a href="{{streamer.twitch}}">
-          <img
-              class="table__data__info__image"
-              v-bind:src="streamer.logo"
-              alt=""
-          />
-        </a>
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.account }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.games }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.wins }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.loses }}
-      </div>
-      <div class="table__data__info table__data__info--center">
-        {{ streamer.winrate * 100 }} %
-      </div>
-    </div>
+      <ClassificationTableData  v-for="(streamer, index) in tournamentData" :streamer="streamer" :index="index" :theme="theme" :filters="filters">
+      </ClassificationTableData>
   </section>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import ClassificationTableData from "./ClassificationTableData.vue";
 export default defineComponent({
   name: "ClassificationTable",
+  components: {
+    ClassificationTableData
+  },
   data() {
     return {
       filters: [
         "#",
         "STREAMER",
-        "TWITCH",
+        "REDES",
         "CUENTA",
-        "PARTIDAS",
-        "GANADAS",
-        "PERDIDAS",
-        "WINRATE",
+        "GANADAS"
       ],
       tournamentData: [
         {
@@ -186,6 +152,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .table {
   display: grid;
   grid-template-areas:
@@ -193,13 +160,13 @@ export default defineComponent({
     "content";
 
   &--spaced {
-    margin: 2rem 3rem 3rem 3rem;
+    margin: 2rem 2vmin 3rem 2vmin;
   }
 }
 
 @mixin Rajdhani {
   font-family: Rajdhani, sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   font-weight: bold;
   line-height: 2rem;
 }
@@ -207,11 +174,10 @@ export default defineComponent({
   @include Rajdhani;
   grid-area: filter;
   gap: 1rem;
-  margin-bottom: 2rem;
   display: grid;
-  grid-template-columns: 0.1fr 0.9fr 0.5fr 1fr 1fr repeat(3, 0.6fr);
-  padding: 1rem;
-
+  grid-template-columns: 0.1fr 0.9fr 0.5fr 1fr 1fr;
+  padding: 1rem 1rem 0 1rem;
+  border-bottom: solid 0.1rem;
   &--center {
     justify-self: center;
   }
@@ -221,42 +187,14 @@ export default defineComponent({
   }
 
   &--light-mode {
-    color: rgba(0, 0, 0, 0.65);
+    color: rgba(0, 0, 0, 0.75);
   }
 }
 
-.table__data {
-  @include Rajdhani;
-  display: grid;
-  grid-template-columns: 0.1fr 0.9fr 0.5fr 1fr 1fr repeat(3, 0.6fr);
-  gap: 1rem;
-  padding: 1rem;
-
-  &--reduce-font-size {
-    font-size: 0.8rem;
+//Collapsed
+@media screen and (max-width:700px) {
+  .table__filters {
+    display: none;
   }
-  &:nth-child(odd) {
-    background-color: #0000002e;
-    border-radius: 0.25rem;
-  }
-  &--dark-mode {
-    color: #bab9bb;
-  }
-
-  &--light-mode {
-    color: rgba(0, 0, 0, 0.65);
-  }
-}
-
-.table__data__info {
-  &--center {
-    align-self: center;
-    justify-self: center;
-  }
-}
-
-.table__data__info__image {
-  max-height: 2rem;
-  border-radius: 50%;
 }
 </style>

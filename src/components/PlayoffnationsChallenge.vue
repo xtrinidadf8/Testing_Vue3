@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <TournamentInformation :theme="theme"></TournamentInformation>
     <ClassificationTable :theme="theme"/>
   </div>
 </template>
@@ -8,12 +7,10 @@
 <script>
 import { defineComponent } from "vue";
 import ClassificationTable from "./ClassificationTable.vue";
-import TournamentInformation from "./TournamentInformation.vue";
 export default defineComponent({
   name: "PlayoffnationsChallenge",
   components: {
     ClassificationTable,
-    TournamentInformation
   },
   props: {
     theme: String,

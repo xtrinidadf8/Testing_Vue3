@@ -2,6 +2,8 @@
   <header>
     <Banner :theme="theme"></Banner>
     <NavigationBar :theme="theme" :brand="brand"></NavigationBar>
+    <TournamentInformation :theme="theme"></TournamentInformation>
+<!--    <BannerPartner :theme="theme"></BannerPartner>-->
   </header>
 </template>
 
@@ -9,11 +11,15 @@
 import { defineComponent } from "vue";
 import NavigationBar from "./HeaderNavigationBar.vue";
 import Banner from "./HeaderBanner.vue";
+import TournamentInformation from "./TournamentInformation.vue";
+import BannerPartner from "./BannerPartner.vue";
 export default defineComponent({
   name: "Header",
   components: {
     Banner,
-    NavigationBar
+    NavigationBar,
+    TournamentInformation,
+    BannerPartner
   },
   props: {
     theme: String,
@@ -29,8 +35,6 @@ export default defineComponent({
 
 <style scoped>
 header {
-  max-height: 25rem;
   display: block;
-  padding: 1rem 0rem 0 3rem ;
 }
 </style>
