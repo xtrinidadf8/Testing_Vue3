@@ -20,7 +20,7 @@ export default defineComponent({
     brand: String,
   },
   setup() {
-    const links = ["Classificacíon", "Premios", "Reglas", "Clips"];
+    const links = ["Classificacíon", "Premios", "Clips", "Reglas"];
     return {
       links,
     }
@@ -59,7 +59,7 @@ export default defineComponent({
   font-size: 3rem;
   line-height: 3rem;
   flex-basis: 5rem;
-  flex-grow: 1;
+  flex-grow: 0.75;
   display: flex;
   align-items: center;
   &--dark-mode {

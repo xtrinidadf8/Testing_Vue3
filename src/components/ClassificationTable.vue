@@ -1,5 +1,5 @@
 <template>
-  <div class="table table--spaced">
+  <section class="table table--spaced">
     <div :class="`table__filters--${theme}-mode`" class="table__filters">
       <div
           class="table__filters--center"
@@ -46,7 +46,7 @@
         {{ streamer.winrate * 100 }} %
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

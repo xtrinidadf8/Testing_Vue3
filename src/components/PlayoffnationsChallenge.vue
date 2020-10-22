@@ -1,16 +1,19 @@
 <template>
   <div class="main">
+    <TournamentInformation :theme="theme"></TournamentInformation>
     <ClassificationTable :theme="theme"/>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import Table from "./ClassificationTable.vue";
+import ClassificationTable from "./ClassificationTable.vue";
+import TournamentInformation from "./TournamentInformation.vue";
 export default defineComponent({
   name: "PlayoffnationsChallenge",
   components: {
-    Table,
+    ClassificationTable,
+    TournamentInformation
   },
   props: {
     theme: String,
@@ -20,12 +23,6 @@ export default defineComponent({
       toggleActive: false,
       changeTheme: this.theme,
     };
-  },
-  methods: {
-    swapTheme(value) {
-      this.changeTheme = value ? "dark" : "light";
-      this.$emit("swap", this.changeTheme);
-    },
   },
 });
 </script>

@@ -1,20 +1,20 @@
 <template>
   <div id="app" :class="'app--' + themeDefault" class="app">
     <Header :theme="themeDefault" :brand="brand"></Header>
-    <ClassificationTable :theme="themeDefault"></ClassificationTable>
+    <PlayoffnationsChallenge :theme="themeDefault"></PlayoffnationsChallenge>
     <Footer :theme="themeDefault"></Footer>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import ClassificationTable from "./components/ClassificationTable.vue";
+import PlayoffnationsChallenge from "./components/PlayoffnationsChallenge.vue";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
 export default defineComponent({
   components: {
-    ClassificationTable,
+    PlayoffnationsChallenge,
     Header,
     Footer,
   },

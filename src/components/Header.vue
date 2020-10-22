@@ -29,8 +29,8 @@ export default defineComponent({
 
 <style scoped>
 header {
-  max-height: 20rem;
+  max-height: 25rem;
   display: block;
-  padding: 1rem 3rem 0 3rem ;
+  padding: 1rem 0rem 0 3rem ;
 }
 </style>

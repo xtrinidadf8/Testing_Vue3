@@ -28,6 +28,7 @@ export default defineComponent({
   background-position: 0 -0.5rem;
   background-repeat: no-repeat;
   margin-bottom: 1rem;
+  margin-right: 3rem;
 }
 .banner__logo {
   display: flex;
