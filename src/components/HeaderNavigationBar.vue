@@ -1,36 +1,42 @@
 <template>
   <nav :class="`navbar navbar--${theme}`">
-    <div :class="`navbar__naming--${theme}-mode`" class="navbar__naming">
-      {{brandUppercase}} CHALLENGE
+    <div :class="[`navbar__naming--${theme}-mode`, 'navbar__naming']">
+      {{ brandUppercase }} CHALLENGE
     </div>
     <div class="navbar__links">
-      <a :class="`navbar__links__link--${theme}-mode`" class="navbar__links__link navbar__links__link--lateral-margin" v-for="link in links">
-        <span class="navbar__links__link__text"> {{link}} </span>
-      </a>
+      <template v-for="(link, index) in links">
+        <a :class="[`navbar__links__link--${theme}-mode`, 'navbar__links__link', 'navbar__links__link--lateral-margin']"
+           :key="index">
+          <span class="navbar__links__link__text"> {{ link }} </span>
+        </a>
+      </template>
     </div>
   </nav>
 </template>
 
-<script lang="js">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "NavigationBar",
+<script>
+import { computed } from 'vue'
+
+export default {
+  name: 'NavigationBar',
   props: {
     theme: String,
     brand: String,
   },
-  setup() {
-    const links = ["Classificacíon", "Premios", "Clips", "Reglas"];
+  setup (props) {
+    const links = ['Classificacíon', 'Premios', 'Clips', 'Reglas']
+
+    const brandUppercase = computed(() => {
+      const brand = props.brand ?? ''
+      return brand.toUpperCase()
+    })
+
     return {
       links,
-    }
-  },
-  computed: {
-    brandUppercase() {
-      return this.brand.toUpperCase();
+      brandUppercase
     }
   }
-});
+}
 </script>
 
 <style lang="scss" scoped>
@@ -40,6 +46,7 @@ export default defineComponent({
   font-weight: bold;
   line-height: 2rem;
 }
+
 .navbar {
   display: flex;
   min-height: 7rem;
@@ -61,9 +68,11 @@ export default defineComponent({
   flex-grow: 0.75;
   display: flex;
   align-items: center;
+
   &--dark-mode {
     color: #bab9bb;
   }
+
   &--light-mode {
     color: rgba(0, 0, 0, 0.85);
   }
@@ -75,6 +84,7 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
 }
+
 .navbar__links__link {
   @include Rajdhani;
   position: relative;
@@ -86,9 +96,11 @@ export default defineComponent({
   &--dark-mode {
     color: #bab9bb;
   }
+
   &--light-mode {
     color: rgba(0, 0, 0, 0.8);
   }
+
   &--lateral-margin {
     margin: 0 1rem 0 1rem;
   }

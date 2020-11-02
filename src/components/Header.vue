@@ -1,22 +1,22 @@
 <template>
   <header>
-    <Banner :theme="theme"></Banner>
+    <HeaderBanner :theme="theme"></HeaderBanner>
     <NavigationBar :theme="theme" :brand="brand"></NavigationBar>
     <TournamentInformation :theme="theme"></TournamentInformation>
-<!--    <BannerPartner :theme="theme"></BannerPartner>-->
+    <!--    <BannerPartner :theme="theme"></BannerPartner>-->
   </header>
 </template>
 
-<script lang="js">
-import { defineComponent } from "vue";
-import NavigationBar from "./HeaderNavigationBar.vue";
-import Banner from "./HeaderBanner.vue";
-import TournamentInformation from "./TournamentInformation.vue";
-import BannerPartner from "./BannerPartner.vue";
-export default defineComponent({
-  name: "Header",
+<script>
+import NavigationBar from './HeaderNavigationBar.vue'
+import HeaderBanner from './HeaderBanner.vue'
+import TournamentInformation from './TournamentInformation.vue'
+import BannerPartner from './BannerPartner.vue'
+
+export default {
+  name: 'Header',
   components: {
-    Banner,
+    HeaderBanner,
     NavigationBar,
     TournamentInformation,
     BannerPartner
@@ -27,10 +27,10 @@ export default defineComponent({
   },
   methods: {
     created: function () {
-      console.log(this.theme);
+      console.log(this.theme)
     },
   },
-});
+}
 </script>
 
 <style scoped>

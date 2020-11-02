@@ -1,9 +1,6 @@
 <template>
-  <div
-      :class="`table__data--${theme}-mode`"
-      class="table__data"
-      @click="toggleDropdown"
-  >
+  <div :class="[`table__data--${theme}-mode`, 'table__data']"
+       @click="arrow === arrows[0] ? arrow = arrows[1] : arrow = arrows[0]">
     <div class="table__data__info table__data__info--center table__data__info--position">
       <span>{{ index + 1 }}</span>
     </div>
@@ -11,51 +8,38 @@
       <span>{{ streamer.name }}</span>
     </div>
     <i :class="`fas fa-caret-${arrow}`" class="table__data__info__arrow"></i>
-    <div class="table__data__info table__data__info--center table__data__info--property_value">
+    <div class="table__data__info table__data__info--center table__data__info--property_value"
+         :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
       <a :href="streamer.twitch" target="_blank" rel="noopener noreferrer">
-        <img
-            class="table__data__info__image"
-            v-bind:src="streamer.logo"
-            alt=""
-        />
+        <img class="table__data__info__image" :src="streamer.logo" alt=""/>
         <div class="table__data__info__stream_status"></div>
       </a>
     </div>
-    <div :data-name="`${filters[3].toLowerCase()}:`" class="table__data__info table__data__info--center table__data__info--property_value">
+    <div :data-name="`${filters[3].toLowerCase()}:`"
+         class="table__data__info table__data__info--center table__data__info--property_value"
+         :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
       <span>{{ streamer.account }}</span>
     </div>
-    <div :data-name="`${filters[4].toLowerCase()}:`" class="table__data__info table__data__info--center table__data__info--property_value">
+    <div :data-name="`${filters[4].toLowerCase()}:`"
+         class="table__data__info table__data__info--center table__data__info--property_value"
+         :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
       <span>{{ streamer.wins }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "ClassificationTableData",
-  data() {
+import { ref } from 'vue'
+
+export default {
+  name: 'ClassificationTableData',
+  setup () {
+    const arrows = ['right', 'down']
+    let arrow = ref('right')
+
     return {
-      dropDownPositions: [
-        "right",
-        "down"
-      ],
-      arrow: "right"
-    }
-  },
-  methods: {
-    toggleDropdown(content) {
-      let classificationData = content.target;
-      let hiddenData = classificationData.querySelectorAll(".table__data__info--property_value");
-      console.log(content);
-      if (this.arrow === this.dropDownPositions[0]) {
-        this.arrow = this.dropDownPositions[1]
-      } else {
-        this.arrow = this.dropDownPositions[0]
-      }
-      hiddenData.forEach((property) => {
-        property.classList.toggle("table__data__info--property_value--visible");
-      })
+      arrows,
+      arrow
     }
   },
   props: {
@@ -64,7 +48,8 @@ export default defineComponent({
     index: Number,
     filters: Array,
   },
-});
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -85,14 +70,17 @@ export default defineComponent({
   &--reduce-font-size {
     font-size: 0.8rem;
   }
+
   &:nth-child(odd) {
     background-color: #0000002e;
     border-radius: 0.25rem;
   }
+
   &:nth-child(even) {
     background-color: #0000000d;
     border-radius: 0.25rem;
   }
+
   &--dark-mode {
     color: #bab9bb;
   }
@@ -104,13 +92,13 @@ export default defineComponent({
 
 .table__data__info {
   &--center {
-   align-self: center;
-   justify-self: center;
+    align-self: center;
+    justify-self: center;
     display: flex;
   }
 }
 
-.table__data__info > a{
+.table__data__info > a {
   position: relative;
   display: inline-flex;
 }
@@ -135,7 +123,7 @@ export default defineComponent({
   position: absolute;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   .table__data {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto;
@@ -143,18 +131,22 @@ export default defineComponent({
 
   .table__data__info {
     font-size: 1rem;
+
     &--position {
       grid-column: 1 / 3;
       justify-self: baseline;
     }
+
     &--streamer {
-      grid-column: 3 / 4 ;
+      grid-column: 3 / 4;
     }
+
     &--property_value {
       display: none;
       justify-self: baseline;
       width: 100%;
       grid-column: 1 / 6;
+
       &--visible {
         position: relative;
         display: flex;
@@ -165,7 +157,7 @@ export default defineComponent({
 
   .table__data__info::before {
     content: attr(data-name);
-    text-transform:capitalize;
+    text-transform: capitalize;
     font-size: 0.7rem;
     position: absolute;
     left: 2rem;

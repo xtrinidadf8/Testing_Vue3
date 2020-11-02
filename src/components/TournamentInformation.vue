@@ -1,48 +1,51 @@
 <template>
-  <section :class="`information--${theme}-mode`" class="information">
-    <div :class="`information__element--${theme}-mode`" class="information__element" v-for="item in information" >
-      <i :class="`fas ${item.icon}`"></i>
-      <span>{{item.text}}</span>
-    </div>
+  <section :class="[`information--${theme}-mode`, 'information']">
+    <template v-for="(item, index) in information">
+      <div :key="index" :class="[`information__element--${theme}-mode`, 'information__element']">
+        <i :class="`fas ${item.icon}`"></i>
+        <span>{{ item.text }}</span>
+      </div>
+    </template>
   </section>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { reactive } from 'vue'
 
-export default defineComponent({
-  name: "TournamentInformation",
+export default {
+  name: 'TournamentInformation',
   props: {
     theme: String,
   },
-  setup() {
-    function fullDateToDayAndMonth(date) {
-      return date.toLocaleString("es", {day: 'numeric', month: 'numeric'})
+  setup () {
+    const fullDateToDayAndMonth = (date) => {
+      return date.toLocaleDateString('es', { day: 'numeric', month: 'numeric' })
     }
-    const information = {
+
+    const information = reactive({
       numberOfStreamers: {
-        icon: "fa-users",
-        text: 10 + " streamers" //TODO: check for streamers count
+        icon: 'fa-users',
+        text: '12 streamers'
       },
       game: {
-        icon: "fa-gamepad",
-        text: "Fornite",
+        icon: 'fa-gamepad',
+        text: 'Fornite',
       },
       sumOfRewards: {
-        icon: "fa-trophy",
-        text: 2500 + " € en Premios",
+        icon: 'fa-trophy',
+        text: '2500 € en Premios',
       },
       dates: {
-        icon: "fa-calendar-alt",
-        text: fullDateToDayAndMonth(new Date()) +
-              " al " + fullDateToDayAndMonth(new Date()) + " de " + (new Date()).getFullYear(),
+        icon: 'fa-calendar-alt',
+        text: `${fullDateToDayAndMonth(new Date())} al ${fullDateToDayAndMonth(new Date())} de ${(new Date()).getFullYear()}`,
       }
-    };
+    })
+
     return {
       information,
     }
   }
-});
+}
 </script>
 
 <style lang="scss" scoped>
@@ -52,12 +55,14 @@ export default defineComponent({
   font-weight: bold;
   line-height: 2rem;
 }
+
 .information {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .information__element {
   @include Rajdhani;
   flex-grow: 1;
@@ -73,6 +78,7 @@ export default defineComponent({
     color: rgba(0, 0, 0, 0.7);
   }
 }
+
 .fas {
   margin: 0.5rem;
 }

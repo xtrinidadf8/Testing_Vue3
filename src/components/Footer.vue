@@ -1,34 +1,24 @@
 <template>
-  <div :class="'footer--' + theme" class="footer">
-    <div
-        :class="`footer__item--${theme}-mode`"
-        class="footer__item"
-    >
+  <div :class="[`footer--${theme}`, 'footer']">
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Playoffnations
     </div>
-    <div
-        :class="`footer__item--${theme}-mode`"
-        class="footer__item"
-    >
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Terms and Conditions
     </div>
-    <div
-        :class="`footer__item--${theme}-mode`"
-        class="footer__item"
-    >
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Social Media
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "Footer",
+export default {
+  name: 'Footer',
   props: {
     theme: String,
   },
-});
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +51,7 @@ export default defineComponent({
 
 .footer__item {
   @include Rajdhani;
+
   &--dark-mode {
     color: #bab9bb;
   }

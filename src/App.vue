@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="'app--' + themeDefault" class="app">
+  <div id="app" :class="[`app--${themeDefault}`, 'app']">
     <Header :theme="themeDefault" :brand="brand"></Header>
     <PlayoffnationsChallenge :theme="themeDefault"></PlayoffnationsChallenge>
     <Footer :theme="themeDefault"></Footer>
@@ -7,28 +7,27 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import PlayoffnationsChallenge from "./components/PlayoffnationsChallenge.vue";
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import PlayoffnationsChallenge from './components/PlayoffnationsChallenge.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
-export default defineComponent({
+export default {
   components: {
     PlayoffnationsChallenge,
     Header,
     Footer,
   },
-  data() {
+  data () {
     return {
-      themeDefault: "dark",
-      brand: "Playoffnations"
-    };
+      themeDefault: 'dark',
+      brand: 'Playoffnations'
+    }
   },
-});
+}
 </script>
 
 <style>
-*, ::after, ::before{
+*, ::after, ::before {
   box-sizing: border-box;
 }
 
