@@ -9,9 +9,8 @@
         {{ filter }}
       </div>
     </div>
-    <template v-for="(streamer, index) in tournamentData">
-      <ClassificationTableData :key="index"
-                               :streamer="streamer"
+    <template v-for="(streamer, index) in tournamentData" :key="index">
+      <ClassificationTableData :streamer="streamer"
                                :index="index"
                                :theme="theme"
                                :filters="filters">

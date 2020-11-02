@@ -1,7 +1,7 @@
 <template>
   <section :class="[`information--${theme}-mode`, 'information']">
-    <template v-for="(item, index) in information">
-      <div :key="index" :class="[`information__element--${theme}-mode`, 'information__element']">
+    <template v-for="(item, index) in information" :key="index">
+      <div :class="[`information__element--${theme}-mode`, 'information__element']">
         <i :class="`fas ${item.icon}`"></i>
         <span>{{ item.text }}</span>
       </div>

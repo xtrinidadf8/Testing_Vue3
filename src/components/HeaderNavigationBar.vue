@@ -4,9 +4,8 @@
       {{ brandUppercase }} CHALLENGE
     </div>
     <div class="navbar__links">
-      <template v-for="(link, index) in links">
-        <a :class="[`navbar__links__link--${theme}-mode`, 'navbar__links__link', 'navbar__links__link--lateral-margin']"
-           :key="index">
+      <template v-for="(link, index) in links" :key="index">
+        <a :class="[`navbar__links__link--${theme}-mode`, 'navbar__links__link', 'navbar__links__link--lateral-margin']">
           <span class="navbar__links__link__text"> {{ link }} </span>
         </a>
       </template>
