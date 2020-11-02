@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <ClassificationTable :theme="theme"/>
+    <router-view></router-view>
   </div>
 </template>
 
