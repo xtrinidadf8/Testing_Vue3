@@ -13,10 +13,14 @@
 </template>
 
 <script>
+import theme from '../theme.js'
+
 export default {
   name: 'Footer',
-  props: {
-    theme: String,
+  setup() {
+    return {
+     theme
+    }
   },
 }
 </script>
@@ -35,11 +39,11 @@ export default {
 }
 
 .footer--dark {
-  background-color: #1b0f23;
+  background-color: #060606e8;
 }
 
 .footer--light {
-  background-color: #e9e9e9;
+  background-color: #d7d5d5;
 }
 
 .footer__item {

@@ -1,9 +1,9 @@
 <template>
   <header>
-    <HeaderBanner :theme="theme"></HeaderBanner>
-    <NavigationBar :theme="theme" :brand="brand"></NavigationBar>
-    <TournamentInformation :theme="theme"></TournamentInformation>
-    <!--    <BannerPartner :theme="theme"></BannerPartner>-->
+    <HeaderBanner></HeaderBanner>
+    <NavigationBar :brand="brand"></NavigationBar>
+    <TournamentInformation></TournamentInformation>
+        <BannerPartner></BannerPartner>
   </header>
 </template>
 
@@ -12,6 +12,7 @@ import NavigationBar from './HeaderNavigationBar.vue'
 import HeaderBanner from './HeaderBanner.vue'
 import TournamentInformation from './TournamentInformation.vue'
 import BannerPartner from './BannerPartner.vue'
+import theme from '../theme.js'
 
 export default {
   name: 'Header',
@@ -22,13 +23,12 @@ export default {
     BannerPartner
   },
   props: {
-    theme: String,
     brand: String,
   },
-  methods: {
-    created: function () {
-      console.log(this.theme)
-    },
+  setup() {
+    return {
+      theme
+    }
   },
 }
 </script>

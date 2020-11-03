@@ -1,13 +1,20 @@
 <template>
   <nav :class="`navbar navbar--${theme}`">
     <div :class="[`navbar__naming--${theme}-mode`, 'navbar__naming']">
-      {{ brandUppercase }} CHALLENGE
+      {{ brandUppercase }}
+      CHALLENGE
     </div>
     <div class="navbar__links">
       <template v-for="(link, index) in links" :key="index">
-        <a :class="[`navbar__links__link--${theme}-mode`, 'navbar__links__link', 'navbar__links__link--lateral-margin']">
-          <span class="navbar__links__link__text"> {{ link }} </span>
-        </a>
+        <router-link :class="[`navbar__links__link--${theme}-mode`,
+                    'navbar__links__link',
+                    'navbar__links__link--lateral-margin',
+                    ]"
+           :to="link.href">
+          <span :class="routePath === link.href ? 'active' : ''" class="navbar__links__link__text">
+            {{ link.name }}
+          </span>
+        </router-link>
       </template>
     </div>
   </nav>
@@ -15,24 +22,47 @@
 
 <script>
 import { computed } from 'vue'
-
+import theme from '../theme.js'
+import router from '../router'
 export default {
   name: 'NavigationBar',
   props: {
-    theme: String,
     brand: String,
   },
   setup (props) {
-    const links = ['Classificacíon', 'Premios', 'Clips', 'Reglas']
+    const links = [
+      {
+        name: 'Clasificación',
+        href: "/"
+      },
+      {
+        name: 'Premios',
+        href: "/premios"
+      },
+      {
+        name: 'Clips',
+        href: "/clips"
+      },
+      {
+        name: 'Reglas',
+        href: "/reglas"
+      }
+    ]
 
     const brandUppercase = computed(() => {
       const brand = props.brand ?? ''
       return brand.toUpperCase()
     })
 
+    const routePath = computed( () => {
+      return router.currentRoute.value.path
+    })
+
     return {
       links,
-      brandUppercase
+      brandUppercase,
+      theme,
+      routePath
     }
   }
 }
@@ -41,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 @mixin Rajdhani {
   font-family: Rajdhani, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   line-height: 2rem;
 }
@@ -55,7 +85,7 @@ export default {
 }
 
 .navbar--dark {
-  background-color: #1b0f23;
+
 }
 
 .navbar__naming {
@@ -67,9 +97,10 @@ export default {
   flex-grow: 0.75;
   display: flex;
   align-items: center;
+  white-space: normal;
 
   &--dark-mode {
-    color: #bab9bb;
+    color: #dfdfdf;
   }
 
   &--light-mode {
@@ -91,6 +122,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex: 1 0;
+  text-decoration: none;
 
   &--dark-mode {
     color: #bab9bb;
@@ -108,13 +140,15 @@ export default {
 .navbar__links__link__text::after {
   content: "";
   width: 0;
-  height: 0.1rem;
+  height: 0.2rem;
   display: block;
-  background: #bab9bb;
+  background: #bf0000;
   transition: 300ms;
 }
-
-.navbar__links__link__text:hover::after {
+.active::after {
+  width: 100%;
+}
+.navbar__links__link__text:hover:after {
   width: 100%;
 }
 </style>
