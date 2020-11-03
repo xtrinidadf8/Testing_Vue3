@@ -7,20 +7,34 @@
     <div class="table__data__info table__data__info--center table__data__info--streamer">
       <span>{{ streamer.name }}</span>
     </div>
-    <i :class="`fas fa-caret-${arrow}`" class="table__data__info__arrow"></i>
-    <div class="table__data__info table__data__info--center table__data__info--property_value"
-         :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
+    <div class="table__data__info table__data__info--center table__data__info--logos">
       <a :href="streamer.twitch" target="_blank" rel="noopener noreferrer">
-        <img class="table__data__info__image" :src="streamer.logo" alt=""/>
-        <div class="table__data__info__stream_status"></div>
+        <img :class="`table__data__info__image--${theme}-mode`"
+            class="table__data__info__image" :src="streamer.logo" alt=""/>
+        <div class="table__data__info__stream_status table__data__info__stream_status--bottom-centered
+                    table__data__info__stream_status--red-round-background table__data__info__stream_status--white-bold-text"
+             :class="{ live : streamer.live}">
+          EN DIRECTO
+        </div>
+      </a>
+      <a href="">
+        <img :class="`table__data__info__image--${theme}-mode`"
+            class="table__data__info__image table__data__info__image--small table__data__info__image--centered" src="../assets/Twitter_Logo_Blue.png"/>
       </a>
     </div>
+    <i :class="`fas fa-caret-${arrow}`" class="table__data__info__arrow"></i>
+
     <div :data-name="`${filters[3].toLowerCase()}:`"
          class="table__data__info table__data__info--center table__data__info--property_value"
          :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
       <span>{{ streamer.account }}</span>
     </div>
     <div :data-name="`${filters[4].toLowerCase()}:`"
+         class="table__data__info table__data__info--center table__data__info--property_value"
+         :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
+      <span>{{ streamer.arenaPoints }}</span>
+    </div>
+    <div :data-name="`${filters[5].toLowerCase()}:`"
          class="table__data__info table__data__info--center table__data__info--property_value"
          :class="{ 'table__data__info--property_value--visible': arrow === arrows[1] }">
       <span>{{ streamer.wins }}</span>
@@ -30,20 +44,21 @@
 
 <script>
 import { ref } from 'vue'
+import theme from '../theme.js'
 
 export default {
   name: 'ClassificationTableData',
-  setup () {
+  setup() {
     const arrows = ['right', 'down']
     let arrow = ref('right')
 
     return {
+      theme,
       arrows,
       arrow
     }
   },
   props: {
-    theme: String,
     streamer: Object,
     index: Number,
     filters: Array,
@@ -63,7 +78,7 @@ export default {
 .table__data {
   @include Rajdhani;
   display: grid;
-  grid-template-columns: 0.1fr 0.9fr 0.5fr 1fr 1fr;
+  grid-template-columns: 0.1fr 0.9fr 0.8fr 1fr 1fr 1fr;
   gap: 1rem;
   padding: 1rem;
 
@@ -71,22 +86,32 @@ export default {
     font-size: 0.8rem;
   }
 
-  &:nth-child(odd) {
-    background-color: #0000002e;
-    border-radius: 0.25rem;
-  }
-
-  &:nth-child(even) {
-    background-color: #0000000d;
-    border-radius: 0.25rem;
-  }
-
   &--dark-mode {
-    color: #bab9bb;
+    color: #dfdfdf;
+
+    &:nth-child(odd) {
+      background-color: #ffffff21;
+      border-radius: 0.25rem;
+    }
+
+    &:nth-child(even) {
+      background-color: #0000000d;
+      border-radius: 0.25rem;
+    }
   }
 
   &--light-mode {
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.9);
+
+    &:nth-child(odd) {
+      background-color: #0000002e;
+      border-radius: 0.25rem;
+    }
+
+    &:nth-child(even) {
+      background-color: #0000000d;
+      border-radius: 0.25rem;
+    }
   }
 }
 
@@ -104,8 +129,28 @@ export default {
 }
 
 .table__data__info__image {
-  max-height: 2rem;
+  max-height: 3rem;
   border-radius: 50%;
+  &--small {
+    max-height: 3rem;
+    border-radius: 0.2rem;
+    margin-left: 2rem;
+  }
+
+  &--centered {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &--dark-mode:hover {
+    box-shadow: 0 0 0.7rem 0.1rem rgba(247, 243, 243, 0.51);
+  }
+
+  &--light-mode:hover {
+    box-shadow: 0 0 0.7rem 0.1rem rgba(117, 112, 112, 0.51)
+  }
+
 }
 
 .table__data__info__arrow {
@@ -113,19 +158,40 @@ export default {
 }
 
 .table__data__info__stream_status {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: grey;
-  border: 2px solid white;
-  bottom: 0;
-  right: 0;
-  position: absolute;
+
+  display: none;
+
+  &.live {
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem;
+  }
+
+  &--bottom-centered {
+    position: absolute;
+    bottom: -0.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--red-round-background {
+    background-color: #e91916d6;
+    border-radius: 0.2rem;
+  }
+
+  &--white-bold-text {
+    color: white;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    font-weight: bold;
+    line-height: 1rem;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .table__data {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, minmax(1rem,2fr)) 1fr;
     grid-template-rows: auto;
   }
 
@@ -133,24 +199,31 @@ export default {
     font-size: 1rem;
 
     &--position {
-      grid-column: 1 / 3;
+      grid-column: 1;
       justify-self: baseline;
     }
 
     &--streamer {
-      grid-column: 3 / 4;
+      grid-column: 2;
+      justify-self: baseline;
     }
-
+    &--logos {
+      grid-column: 6 / 8;
+    }
     &--property_value {
       display: none;
-      justify-self: baseline;
-      width: 100%;
-      grid-column: 1 / 6;
+      flex-grow: 1;
+      grid-column: 1 / 9;
+
+      & > span {
+        margin-right: 2rem;
+      }
 
       &--visible {
         position: relative;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
+        width: 100%;
       }
     }
   }
@@ -165,7 +238,7 @@ export default {
 
   .table__data__info__arrow {
     display: inline-block;
-    grid-column: 5;
+    grid-column: 9;
     justify-self: end;
     align-self: center;
     font-size: 1.2rem;

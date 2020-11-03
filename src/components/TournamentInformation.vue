@@ -11,12 +11,10 @@
 
 <script>
 import { reactive } from 'vue'
+import theme from '../theme.js'
 
 export default {
   name: 'TournamentInformation',
-  props: {
-    theme: String,
-  },
   setup () {
     const fullDateToDayAndMonth = (date) => {
       return date.toLocaleDateString('es', { day: 'numeric', month: 'numeric' })
@@ -43,6 +41,7 @@ export default {
 
     return {
       information,
+      theme
     }
   }
 }
@@ -51,16 +50,16 @@ export default {
 <style lang="scss" scoped>
 @mixin Rajdhani {
   font-family: Rajdhani, sans-serif;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 1.2rem;
   line-height: 2rem;
 }
 
 .information {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
 .information__element {
@@ -69,13 +68,16 @@ export default {
   display: inline-block;
   justify-content: center;
   text-align: center;
+  padding: 1rem;
 
   &--dark-mode {
     color: #bab9bb;
+    background-color: #000000;
   }
 
   &--light-mode {
     color: rgba(0, 0, 0, 0.7);
+    background-color: #b0b0b030;
   }
 }
 
