@@ -1,41 +1,19 @@
 <template>
   <div class="main">
-    <TournamentInformation :theme="theme"></TournamentInformation>
-    <ClassificationTable :theme="theme"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import ClassificationTable from "./ClassificationTable.vue";
-import TournamentInformation from "./TournamentInformation.vue";
-export default defineComponent({
-  name: "PlayoffnationsChallenge",
-  components: {
-    ClassificationTable,
-    TournamentInformation
-  },
-  props: {
-    theme: String,
-  },
-  data() {
-    return {
-      toggleActive: false,
-      changeTheme: this.theme,
-    };
-  },
-});
+export default {
+  name: 'PlayoffnationsChallenge',
+}
 </script>
 
 <style scoped>
 .main {
   color: #bab9bb;
-}
-
-.main--dark {
-  color: #bab9bb;
-}
-.main--light {
-  color: rgba(0, 0, 0, 0.65);
+  flex-grow: 1;
+  margin-top: 1rem;
 }
 </style>

@@ -1,48 +1,49 @@
 <template>
-  <div :class="'footer--' + theme" class="footer">
-    <div
-        v-bind:class="'footer__item--Rajdhani-' + theme + '-mode'"
-        class="footer__item"
-    >
+  <div :class="[`footer--${theme}`, 'footer']">
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Playoffnations
     </div>
-    <div
-        v-bind:class="'footer__item--Rajdhani-' + theme + '-mode'"
-        class="footer__item"
-    >
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Terms and Conditions
     </div>
-    <div
-        v-bind:class="'footer__item--Rajdhani-' + theme + '-mode'"
-        class="footer__item"
-    >
+    <div :class="[`footer__item--${theme}-mode`, 'footer__item']">
       Social Media
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "Footer",
-  props: {
-    theme: String,
+import theme from '../theme.js'
+
+export default {
+  name: 'Footer',
+  setup() {
+    return {
+     theme
+    }
   },
-});
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@mixin Rajdhani {
+  font-family: Rajdhani, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
 .footer {
   height: 4rem;
   display: flex;
 }
 
 .footer--dark {
-  background-color: #1b0f23;
+  background-color: #060606e8;
 }
 
 .footer--light {
-  background-color: #e9e9e9;
+  background-color: #d7d5d5;
 }
 
 .footer__item {
@@ -52,19 +53,16 @@ export default defineComponent({
   align-items: center;
 }
 
-.footer__item--Rajdhani-dark-mode {
-  font-family: Rajdhani, sans-serif;
-  color: #bab9bb;
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 2rem;
+.footer__item {
+  @include Rajdhani;
+
+  &--dark-mode {
+    color: #bab9bb;
+  }
+
+  &--light-mode {
+    color: rgba(0, 0, 0, 0.75);
+  }
 }
 
-.footer__item--Rajdhani-light-mode {
-  font-family: Rajdhani, sans-serif;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 2rem;
-}
 </style>

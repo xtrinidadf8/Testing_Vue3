@@ -1,36 +1,40 @@
 <template>
   <header>
-    <Banner :theme="theme"></Banner>
-    <NavigationBar :theme="theme" :brand="brand"></NavigationBar>
+    <HeaderBanner></HeaderBanner>
+    <NavigationBar :brand="brand"></NavigationBar>
+    <TournamentInformation></TournamentInformation>
+        <BannerPartner></BannerPartner>
   </header>
 </template>
 
-<script lang="js">
-import { defineComponent } from "vue";
-import NavigationBar from "./HeaderNavigationBar.vue";
-import Banner from "./HeaderBanner.vue";
-export default defineComponent({
-  name: "Header",
+<script>
+import NavigationBar from './HeaderNavigationBar.vue'
+import HeaderBanner from './HeaderBanner.vue'
+import TournamentInformation from './TournamentInformation.vue'
+import BannerPartner from './BannerPartner.vue'
+import theme from '../theme.js'
+
+export default {
+  name: 'Header',
   components: {
-    Banner,
-    NavigationBar
+    HeaderBanner,
+    NavigationBar,
+    TournamentInformation,
+    BannerPartner
   },
   props: {
-    theme: String,
     brand: String,
   },
-  methods: {
-    created: function () {
-      console.log(this.theme);
-    },
+  setup() {
+    return {
+      theme
+    }
   },
-});
+}
 </script>
 
 <style scoped>
 header {
-  max-height: 25rem;
   display: block;
-  padding: 1rem 0rem 0 3rem ;
 }
 </style>
